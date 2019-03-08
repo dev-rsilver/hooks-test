@@ -1,10 +1,35 @@
 import React, {useState, useEffect} from 'react'
+import anime from 'animejs'
+import './clock.css'
+
 
 export default function ClockSVG(props) {
     const [date, setDate] = useState(new Date());
-
+    
     var interval = 250;
     useEffect(() => {
+
+        //Initial animation for the clock.
+        anime({
+            targets: ".spoke",
+            opacity: [0, 1],
+            delay: anime.stagger(10)
+        })
+
+        anime({
+            targets: ".arrow",
+            opacity: 1,
+            duration: 5000
+        })
+
+        anime({
+            targets: ".circle",
+            opacity: 1,
+            duration: 100
+        })
+
+
+        //Set an interval that updates the clock.
         var id = setInterval(() => {
             setDate(new Date());
         }, interval);
@@ -41,7 +66,7 @@ export default function ClockSVG(props) {
             spokeHeight = 10;
         }
 
-        spokes.push(<line key={i} x1={centerX} y1="0" x2={centerX} y2={spokeHeight} stroke="black" strokeWidth={spokeWidth} transform={`rotate(${i * spokeDegrees}, ${centerX}, ${centerY})`} />)
+        spokes.push(<line key={i} className="transparent spoke" x1={centerX} y1="0" x2={centerX} y2={spokeHeight} stroke="black" strokeWidth={spokeWidth} transform={`rotate(${i * spokeDegrees}, ${centerX}, ${centerY})`} />)
     }
 
 
@@ -57,12 +82,12 @@ export default function ClockSVG(props) {
     var minuteRotation = date.getMinutes() * spokeDegrees;
     var secondRotation = date.getSeconds() * spokeDegrees;
 
-    var hourArrow = <line x1={centerX} y1="50" x2={centerX} y2={centerY} stroke="black" strokeWidth="2" transform={`rotate(${hourRotation}, ${centerX}, ${centerY})`}/>;
-    var minuteArrow = <line x1={centerX} y1="40" x2={centerX} y2={centerY} stroke="black" strokeWidth="2" transform={`rotate(${minuteRotation}, ${centerX}, ${centerY})`}/>;
-    var secondArrow = <line x1={centerX} y1="30" x2={centerX} y2={centerY} stroke="black" strokeWidth="1" transform={`rotate(${secondRotation}, ${centerX}, ${centerY})`}/>;
+    var hourArrow = <line className="transparent arrow" x1={centerX} y1="50" x2={centerX} y2={centerY} stroke="black" strokeWidth="2" transform={`rotate(${hourRotation}, ${centerX}, ${centerY})`}/>;
+    var minuteArrow = <line className="transparent arrow" x1={centerX} y1="40" x2={centerX} y2={centerY} stroke="black" strokeWidth="2" transform={`rotate(${minuteRotation}, ${centerX}, ${centerY})`}/>;
+    var secondArrow = <line className="transparent arrow" x1={centerX} y1="30" x2={centerX} y2={centerY} stroke="black" strokeWidth="1" transform={`rotate(${secondRotation}, ${centerX}, ${centerY})`}/>;
 
     return(<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
-        <circle cx={centerX} cy={centerY} r={circleRadius} />
+        <circle className="transparent circle" cx={centerX} cy={centerY} r={circleRadius} />
         {spokes}
         {hourArrow}
         {minuteArrow}
