@@ -1,2 +1,2 @@
 # Test Repo
-Code is **not** production quality. Creates an animated clock and date label to test hooks.
+Code is **not** production quality. Creates an animated clock, date label and todo list to test hooks.
