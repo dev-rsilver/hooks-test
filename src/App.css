@@ -6,8 +6,8 @@
   background-color: #ffffff;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: top;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: black;
@@ -15,4 +15,9 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.item {
+  margin-right:50px;
+  margin-top:30px;
 }
